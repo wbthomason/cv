@@ -1,0 +1,602 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% Simple LaTeX CV Template %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% NOTE: If you find that it says                                     %%
+%%                                                                    %%
+%%                           1 of ??                                  %%
+%%                                                                    %%
+%% at the bottom of your first page, this means that the AUX file     %%
+%% was not available when you ran LaTeX on this source. Simply RERUN  %%
+%% LaTeX to get the ``??'' replaced with the number of the last page  %%
+%% of the document. The AUX file will be generated on the first run   %%
+%% of LaTeX and used on the second run to fill in all of the          %%
+%% references.                                                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Don't like 10pt? Try 11pt or 12pt
+\documentclass[10pt]{article}
+
+% The automated optical recognition software used to digitize resume
+% information works best with fonts that do not have serifs. This
+% command uses a sans serif font throughout. Uncomment both lines (or at
+% least the second) to restore a Roman font (i.e., a font with serifs).
+%\usepackage{times}
+%\renewcommand{\familydefault}{\sfdefault}
+
+% This is a helpful package that puts math inside length specifications
+\usepackage{calc}
+\usepackage{comment}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{tabu}
+%\usepackage{hyperref}
+
+% Layout: Puts the section titles on left side of page
+\reversemarginpar
+
+%
+%         PAPER SIZE, PAGE NUMBER, AND DOCUMENT LAYOUT NOTES:
+%
+% The next \usepackage line changes the layout for CV style section
+% headings as marginal notes. It also sets up the paper size as either
+% letter or A4. By default, letter was used. If A4 paper is desired,
+% comment out the letterpaper lines and uncomment the a4paper lines.
+%
+% As you can see, the margin widths and section title widths can be
+% easily adjusted.
+%
+% ALSO: Notice that the includefoot option can be commented OUT in order
+% to put the PAGE NUMBER *IN* the bottom margin. This will make the
+% effective text area larger.
+%
+% IF YOU WISH TO REMOVE THE ``of LASTPAGE'' next to each page number,
+% see the note about the +LP and -LP lines below. Comment out the +LP
+% and uncomment the -LP.
+%
+% IF YOU WISH TO REMOVE PAGE NUMBERS, be sure that the includefoot line
+% is uncommented and ALSO uncomment the \pagestyle{empty} a few lines
+% below.
+%
+
+%% Use these lines for letter-sized paper
+\usepackage[paper=letterpaper,
+	%includefoot, % Uncomment to put page number above margin
+	marginparwidth=1.2in,     % Length of section titles
+	marginparsep=.05in,       % Space between titles and text
+	margin=1in,               % 1 inch margins
+	includemp]{geometry}
+
+%% Use these lines for A4-sized paper
+%\usepackage[paper=a4paper,
+%            %includefoot, % Uncomment to put page number above margin
+%            marginparwidth=30.5mm,    % Length of section titles
+%            marginparsep=1.5mm,       % Space between titles and text
+%            margin=25mm,              % 25mm margins
+%            includemp]{geometry}
+
+%% More layout: Get rid of indenting throughout entire document
+\setlength{\parindent}{0in}
+
+\usepackage[shortlabels]{enumitem}
+
+%% Reference the last page in the page number
+%
+% NOTE: comment the +LP line and uncomment the -LP line to have page
+%       numbers without the ``of ##'' last page reference)
+%
+% NOTE: uncomment the \pagestyle{empty} line to get rid of all page
+%       numbers (make sure includefoot is commented out above)
+%
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+%\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+{0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%
+	\parbox{4in}{\, \hfill %
+		%                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+		%\arabic{page}                               % -LP
+		\hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+	linkcolor=darkblue,urlcolor=darkblue,
+	anchorcolor=darkblue,citecolor=darkblue}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The title (name) with a horizontal rule under it
+% (optional argument typesets an object right-justified across from name
+%  as well)
+%
+% Usage: \makeheading{name}
+%        OR
+%        \makeheading[right_object]{name}
+%
+% Place at top of document. It should be the first thing.
+% If ``right_object'' is provided in the square-braced optional
+% argument, it will be right justified on the same line as ``name'' at
+% the top of the CV. For example:
+%
+%       \makeheading[\emph{Curriculum vitae}]{Your Name}
+%
+% will put an emphasized ``Curriculum vitae'' at the top of the document
+% as a title. Likewise, a picture could be included:
+%
+%   \makeheading[\includegraphics[height=1.5in]{my_picutre}]{Your Name}
+%
+% the picture will be flush right across from the name.
+\newcommand{\makeheading}[2][]%
+{\hspace*{-\marginparsep minus \marginparwidth}%
+	\begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+		{\large \bfseries #2 \hfill #1}\\[-0.15\baselineskip]%
+		\rule{\columnwidth}{1pt}%
+	\end{minipage}}
+
+% The section headings
+%
+% Usage: \section{section name}
+\renewcommand{\section}[1]{\pagebreak[3]%
+	\hyphenpenalty=10000%
+	\vspace{1.3\baselineskip}%
+	\phantomsection\addcontentsline{toc}{section}{#1}%
+	\noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\raggedright #1}}}%
+	\vspace{-\baselineskip}\par}
+
+% An itemize-style list with lots of space between items
+\newenvironment{outerlist}[1][\enskip\textbullet]%
+{\begin{itemize}[#1,leftmargin=*]}{\end{itemize}%
+	\vspace{-.6\baselineskip}}
+
+% An environment IDENTICAL to outerlist that has better pre-list spacing
+% when used as the first thing in a \section
+\newenvironment{lonelist}[1][\enskip\textbullet]%
+{\begin{list}{#1}{%
+			\setlength{\partopsep}{0pt}%
+			\setlength{\topsep}{0pt}}}
+		{\end{list}\vspace{-.6\baselineskip}}
+
+% An itemize-style list with little space between items
+\newenvironment{innerlist}[1][\enskip\textbullet]%
+{\begin{itemize}[#1,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt]}
+		{\end{itemize}}
+
+% An environment IDENTICAL to innerlist that has better pre-list spacing
+% when used as the first thing in a \section
+\newenvironment{loneinnerlist}[1][\enskip\textbullet]%
+{\begin{itemize}[#1,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt]}
+		{\end{itemize}\vspace{-.6\baselineskip}}
+
+% To add some paragraph space between lines.
+% This also tells LaTeX to preferably break a page on one of these gaps
+% if there is a needed pagebreak nearby.
+\newcommand{\blankline}{\quad\pagebreak[3]}
+\newcommand{\halfblankline}{\quad\vspace{-0.5\baselineskip}\pagebreak[3]}
+
+% Uses hyperref to link DOI
+\newcommand\doilink[1]{\href{http://dx.doi.org/#1}{#1}}
+\newcommand\doi[1]{doi:\doilink{#1}}
+
+% For \url{SOME_URL}, links SOME_URL to the url SOME_URL
+\providecommand*\url[1]{\href{#1}{#1}}
+% Same as above, but pretty-prints SOME_URL in teletype fixed-width font
+\renewcommand*\url[1]{\href{#1}{\texttt{#1}}}
+
+% For \email{ADDRESS}, links ADDRESS to the url mailto:ADDRESS
+\providecommand*\email[1]{\href{mailto:#1}{#1}}
+% Same as above, but pretty-prints ADDRESS in teletype fixed-width font
+%\renewcommand*\email[1]{\href{mailto:#1}{\texttt{#1}}}
+
+%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%    \TeX}}
+\providecommand\BibTeX{{B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+\TeX}}
+\providecommand\Matlab{\textsc{Matlab}}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\sloppy
+\makeheading{\huge{Wil Thomason}}
+
+\section{Contact Information}
+
+% NOTE: Mind where the & separators and \\ breaks are in the following
+%       table.
+%
+% ALSO: \rcollength is the width of the right column of the table
+%       (adjust it to your liking; default is 1.85in).
+%
+\newlength{\rcollength}\setlength{\rcollength}{1.4in}%
+%
+\begin{tabu} to 1.0\textwidth {X[l]X[r]}
+	Cornell University             & 804.591.7318                      \\
+	Department of Computer Science & \email{wbthomason@cs.cornell.edu} \\
+	107 Hoy Road                   &                                   \\
+	Ithaca, NY 14853                                                   \\
+	\href{https://www.cs.cornell.edu/~wil/}{\nolinkurl{https://www.cs.cornell.edu/~wil/}}
+\end{tabu}
+
+\section{Objective}
+
+I am broadly interested in algorithms for robotics, with a focus on \textbf{planning algorithms} and
+\textbf{integrated task and motion planning}. My work studies efficient, principled approaches to
+solving realistic robot problems with both logical and geometric complexity. I am also interested in
+fusing classical planning methods with machine learning to enable more robust, capable robots, as
+well as algorithms for efficient planning in constrained domains, programming languages research,
+and robot autonomy/decision-making. In all my work, I care about finding solutions that are both
+soundly based in theory and practical for real-world use.
+
+\section{Research Interests}
+
+\textbf{Robotics}: integrated task and motion planning, constrained planning, multi-agent
+coordination\\
+\textbf{Machine Learning}: learning to plan, combining ML with classical planning\\
+\textbf{Programming Languages}: type theory, effect systems, compilers
+
+\section{Education}
+
+\href{https://www.cs.cornell.edu}{\textbf{Cornell University}},
+Ithaca, NY\hfill{August 2015 -- Present}
+\begin{innerlist}
+	\item[] Ph.D., Computer Science
+\end{innerlist}\bigskip
+
+\href{https://www.cs.cornell.edu}{\textbf{Cornell University}},
+Ithaca, NY\hfill{June 2019}
+\begin{innerlist}
+	\item[] MS, Computer Science
+	\item[] \textbf{Relevant Courses:}
+    Graduate Algorithms, Advanced Machine Learning, Graduate Programming Languages, Intelligent
+    Sensor Planning and Control, Mobile Robot Manipulation, Formal Methods for Robotics
+\end{innerlist}\bigskip
+
+\href{https://www.virginia.edu}{\textbf{University of Virginia}},
+Charlottesville, VA\hfill{August 2012 -- May 2015}
+\begin{innerlist}
+	\item[] BS, Computer Science, Mathematics
+	\item[] \textbf{Relevant Courses:}
+	\emph{CS 6161}: Graduate Design and Analysis of Algorithms (Fall 2014), \emph{CS 6610}: Graduate
+	Programming Languages (Fall 2014)
+\end{innerlist}
+
+\section{Publications}
+
+\textbf{Automatic Distributed Multi-Agent Coordination of Single-Agent Robot Controllers.}
+\emph{ICRA (in submission)} (2019)
+\begin{innerlist}
+	\item[] \emph{Wil Thomason, Abhishek Anand, Greg Morrisett, Ross Knepper.}
+	\item[] We present a framework for automatically transforming single-agent robot controllers
+	into distributed multi-agent controllers with guaranteed safety and progress under lightweight
+	assumptions. The core of this framework is a simple protocol that maintains two invariants:
+	(a) all executed actions are non-colliding, and (b) there is always a valid plan to reverse
+	the system back to an earlier state.
+\end{innerlist}\bigskip
+
+\textbf{A Unified Sampling-Based Approach to Integrated Task and Motion Planning.}
+\emph{ISRR} (2019)
+\begin{innerlist}
+	\item[] \emph{Wil Thomason, Ross Knepper}.
+	\item[] We contribute a novel approach to integrated task and motion planning that adapts any
+	off-the-shelf motion planning algorithm to automatically solve \emph{task and motion planning
+		problems}. We construct a state space embedding the full symbolic and continuous state of a
+	planning problem into a single highly factorable space. Combined with a continuous semantics
+	for Boolean predicates, which we use to derive navigation functions to task-level salient
+	regions of the continuous space, we can efficiently solve complex manipulation problems with
+	few domain-specific assumptions.
+\end{innerlist}\bigskip
+
+\textbf{Social Momentum: A Framework for Legible Navigation in Dynamic Multi-Agent Environments.}
+\emph{HRI} (2018)
+\begin{innerlist}
+	\item[] \emph{Christoforos Mavrogiannis, Wil Thomason, Ross Knepper.}
+	\item[] We design a planning framework that aims at generating motion that clearly communicates
+	an agent’s intended collision avoidance strategy rather than its destination. Our framework
+	estimates the most likely intended avoidance protocols of others based on their past
+	behaviors, superimposes them, and generates an expressive and socially compliant robot action
+	that reinforces the expectations of others regarding these avoidance protocols.
+\end{innerlist}\bigskip
+
+\textbf{Zero-Shot Learning for Unfamiliar Gesture Recognition.}
+\emph{ISER} (2016)
+\begin{innerlist}
+	\item[] \emph{Wil Thomason, Ross Knepper.}
+	\item[] We explore a method for achieving increased understanding of complex, situated
+	communications by leveraging coordinated natural language, gesture, and context. These three
+	problems have largely been treated separately, but unified consideration of them can yield
+	gains in comprehension.
+\end{innerlist}\bigskip
+
+\textbf{An Accurate Real-Time RFID-Based Location System.}
+\emph{IJRFITA} (2016)
+\begin{innerlist}
+	\item[] \emph{Kirti Chawla, Christopher McFarland, Gabriel Robins, Wil Thomason.}
+	\item[] We outline an RFID-based object localization framework addressing challenges of
+	performance and applicability and propose the use of Received Signal Strength (RSS) to model
+	the behavior of radio signals decaying over distance in an orientation-agnostic manner to
+	simultaneously locate a number of stationary and mobile objects.
+\end{innerlist}
+
+\section{Awards}
+
+\textbf{Outstanding Teaching Assistant Award}\\\textit{Cornell University Department of Computer Science}, May 2017
+\begin{innerlist}
+	\item[] Awarded for my work as a TA for the new Foundations of Robotics course in Fall 2016,
+	taught by Ross Knepper.
+\end{innerlist}\bigskip
+
+\textbf{NDSEG Fellow} \hfill \textit{American Society for Engineering Education}, April 2017
+\begin{innerlist}
+	\item[] The National Defense Science and Engineering Graduate (NDSEG) Fellowship is a highly
+	competitive, portable fellowship that is awarded to U.S. citizens and nationals who intend to
+	pursue a doctoral degree in one of fifteen supported disciplines. NDSEG confers high honors
+	upon its recipients, and allows them to attend whichever U.S. institution they choose.
+	(\url{https://ndseg.asee.org/})
+\end{innerlist}\bigskip
+
+\textbf{NSF GRFP Fellow} \hfill \textit{The National Science Foundation}, March 2017
+\begin{innerlist}
+	\item[] The NSF Graduate Research Fellowship Program recognizes and supports outstanding
+	graduate students in NSF-supported science, technology, engineering, and mathematics
+	disciplines who are pursuing research-based Master's and doctoral degrees at accredited United
+	States institutions. (\url{https://www.nsfgrfp.org/})
+\end{innerlist}\bigskip
+
+\textbf{Outstanding Teaching Assistant Award}\\\textit{Cornell University Department of Computer Science}, May 2016
+\begin{innerlist}
+	\item[] Awarded for my work as a TA for the Intro to Python course (CS 1110) in Fall 2015,
+	taught by Walker White.
+\end{innerlist}\bigskip
+
+\textbf{NSF GRFP Honorable Mention} \hfill \textit{The National Science Foundation}, March 2016
+\begin{innerlist}
+	\item[] The NSF Graduate Research Fellowship Program recognizes and supports outstanding
+	graduate students in NSF-supported science, technology, engineering, and mathematics
+	disciplines who are pursuing research-based Master's and doctoral degrees at accredited United
+	States institutions.(\url{https://www.nsfgrfp.org/})
+\end{innerlist}\bigskip
+
+\textbf{Louis T. Rader Outstanding Education Undergraduate Student Award} \hfill \textit{University of Virginia Department of Computer Science}, May 2015
+\begin{innerlist}
+	\item[] Awarded for my work for several years as a TA for multiple courses in the computer
+	science department at UVA.
+\end{innerlist}
+
+\section{Presentations}
+
+``A Flexible Sampling-Based Approach to Task and Motion Planning.''\\
+\emph{RSS 2019 Workshop on Robust Task and Motion Planning}\hfill
+June 23, 2019
+\begin{innerlist}
+	\item[] \url{http://dyalab.mines.edu/2019/rss-workshop/thomason.pdf}
+\end{innerlist}\bigskip
+
+``Which comes first, the task plan or the motion plan?.'' (joint with Ross Knepper)\\
+\emph{RSS 2018 Workshop on Exhibition and Benchmarking of Task and Motion Planners}\hfill
+June 30, 2018
+\begin{innerlist}
+	\item[] \url{http://www.neil.dantam.name/2018/rss-tmp-workshop/}
+\end{innerlist}\bigskip
+
+``Exploiting Heterogeneity in Robot Teams Through a Formalism of Capabilities.''\\
+\emph{RSS 2018 Workshop on Heterogeneity and Diversity for Resilience in Multi-Robot Systems}\hfill
+July 15, 2017
+\begin{innerlist}
+	\item[] \url{https://www.cs.cornell.edu/\textasciitilde{}wil/papers/\\rss2017\_workshop\_heterogeneous\_coordination.pdf}
+\end{innerlist}\bigskip
+
+``Toward Contextual Grounding of Unfamiliar Gestures for Human-Robot Interaction.''\\
+\emph{FG 2017: First International Workshop on Adaptive Shot Learning for Gesture Understanding and Production}\hfill
+May 30, 2017
+\begin{innerlist}
+	\item[] \url{https://www.cs.cornell.edu/\textasciitilde{}wil/papers/asl4gup2017\_unfamiliargestures.pdf}
+\end{innerlist}\bigskip
+
+``Recognizing Unfamiliar Gestures for Human-Robot Interaction through Zero Shot Learning.''\\
+\emph{ISER 2016}\hfill
+October 6th, 2016
+\begin{innerlist}
+	\item[] \url{http://www.iser2016.org/program/}
+\end{innerlist}\bigskip
+
+``Recognizing Unfamiliar Gestures for Human-Robot Interaction through Zero-Shot Learning.''\\
+\emph{2nd Workshop on Model Learning for Human-Robot Communication, RSS 2016}\hfill
+June 19th, 2016
+\begin{innerlist}
+	\item[] \url{http://www.ece.rochester.edu/projects/rail/mlhrc2016/}
+\end{innerlist}
+
+\section{Research Experience}
+\textbf{Graduate Research Assistant} \hfill {August 2015 -- Present}\\
+\emph{Cornell University, Department of Computer Science}
+\begin{innerlist}
+	\item[] Advised by Professor Ross Knepper, I have studied problems in the domains of integrated
+	task and motion planning, human-robot interaction and multi-agent planning. Specifically, I
+	have made advances in efficient task and motion planning, gesture recognition, and
+	coordination for ad hoc teams of heterogeneous robots. This work has resulted in several
+	publications and presentations, and is ongoing.
+\end{innerlist}\bigskip
+
+\textbf{Undergraduate Research Assistant} \hfill {August 2014 -- July 2015}\\
+\emph{The University of Virginia, Department of Computer Science}
+\begin{innerlist}
+	\item[] I worked with Professor Westley Weimer on automatic software functionality
+	transplantation. We developed an algorithm based on analyzing differences in test suite
+	performance to identify software modules responsible for specific functionality and a
+	combination of function dependency tracing and extraction with the GenProg program repair tool
+	to perform transplants.
+\end{innerlist}\bigskip
+
+\textbf{Undergraduate Research Assistant} \hfill {January 2013 -- May 2014}\\
+\emph{The University of Virginia, Department of Computer Science}
+\begin{innerlist}
+	\item[] As a part of Professor Gabriel Robins' lab, I helped to create an efficient, scalable
+	system for real-time localization of objects in 3D space using passive RFID tags. In addition
+	to designing and running experiments for the system, I researched and created a novel approach
+	to distinguishing between noisy measurements and measurements corresponding to moving objects.
+	This approach, which was based on a sliding-window particle filter, significantly increased
+	the accuracy of our system. This work resulted in a journal publication.
+\end{innerlist}
+
+\section{Industry Experience}
+
+\textbf{Software Engineering Intern at Fluencia}\hfill May 2015 -- August 2015\\
+Worked on adding voice understanding for speech practice exercises
+\begin{itemize}
+	\setlength\itemsep{0em}
+	\item Improved voice understanding software
+	\item Integrated into language learning website
+	\item Created test and development framework for voice exercises
+\end{itemize}\bigskip
+
+\textbf{Software Development Engineer Intern at Microsoft}\hfill May 2014 -- August 2014\\
+Microsoft Accounts Client Team
+\begin{itemize}
+	\setlength\itemsep{0em}
+	\item Implemented and tested cryptographic operations and network protocol for forthcoming
+	      feature in Microsoft Accounts Android app. The implemented feature enables more convenient and
+	      more secure sign-in for Microsoft accounts via mobile devices.
+	\item Coordinated the work of several other interns working on related components of the same
+	      project to ensure successful integration and delivery of the fully-functional feature ahead of
+	      schedule.
+\end{itemize}\bigskip
+
+\textbf{Software Development Engineer Intern at Microsoft}\hfill May 2013 -- August 2013\\
+Xbox LIVE Cloud Security Team
+\begin{itemize}
+	\setlength\itemsep{0em}
+	\item Designed, implemented, and shipped a RESTful web service capable of logging and auditing
+	      security records in Xbox LIVE in real time. Also designed, created, and tuned associated
+	      database and procedures. Service is currently in use in the Xbox LIVE network.
+	\item Spearheaded and completed a total rewrite of an important development library – starting
+	      with old, cobbled together library used across principal components of the Xbox LIVE network,
+	      redesigned and reimplemented the entire library to provide a faster and easier to use
+	      interface to the same core functionality.
+\end{itemize}
+
+\section{Technical\\ Skills}
+
+\textbf{Programming Languages:} C++, Python, Rust, C, CL, Haskell, OCaml\\
+\textbf{Technologies:} Linux, ROS, OMPL, PyTorch, TensorFlow, Git, CUDA
+
+\section{Teaching Experience}
+
+\textbf{Graduate Teaching Assistant: CS 4750} \hfill Fall 2016 \& Fall 2017\\
+\emph{Cornell University}
+\begin{innerlist}
+	\item[] TA for Foundations of Robotics: A new course designed to introduce students to the
+	knowledge they need to conduct research in robotics. I helped to create the course syllabus,
+	textbook, and software for course assignments, and was also responsible for giving weekly
+	office hours, grading, and assisting with lecturing.
+\end{innerlist}\bigskip
+
+\textbf{Graduate Teaching Assistant: CS 1110} \hfill Fall 2015\\
+\emph{Cornell University}
+\begin{innerlist}
+	\item[] Head TA for Cornell's introductory computer science course. Responsible for coordinating
+	TA staff, giving review lectures, supervising lab sessions, grading, and giving weekly office
+	hours.
+\end{innerlist}\bigskip
+
+\textbf{Instructor: Introduction to Robotics} \hfill Spring 2015\\
+\emph{University of Virginia}
+\begin{innerlist}
+	\item[] I designed and taught a 1-credit course introducing undergraduate students to core
+	topics in robotics. As a part of the course, students built and programmed their own quadrotor
+	robots and learned about basic kinematics, control, perception, and learning.
+\end{innerlist}\bigskip
+
+\textbf{Undergraduate Teaching Assistant: CS 4610} \hfill Spring 2015\\
+\emph{University of Virginia}
+\begin{innerlist}
+	\item[] TA for UVA's undergraduate programming languages course.
+\end{innerlist}\bigskip
+
+\textbf{Undergraduate Teaching Assistant: CS 4710} \hfill Spring 2015\\
+\emph{University of Virginia}
+\begin{innerlist}
+	\item[] TA for UVA's undergraduate artificial intelligence course.
+\end{innerlist}\bigskip
+
+\textbf{Undergraduate Teaching Assistant: CS 4414} \hfill Spring 2014\\
+\emph{University of Virginia}
+\begin{innerlist}
+	\item[] TA for UVA's undergraduate operating systems course. Helped create course content using the Rust programming language as well as an automatic grading server for the class.
+\end{innerlist}\bigskip
+
+\textbf{Undergraduate Teaching Assistant: CS 2150} \hfill Fall 2013 -- Spring 2015\\
+\emph{University of Virginia}
+\begin{innerlist}
+	\item[] TA for UVA's undergraduate data structures and C++ programming course.
+\end{innerlist}
+
+\section{Languages}
+
+English \emph{(Fluency: Native speaker)}\\
+German \emph{(Fluency: Working)}
+
+\section{Outreach}
+
+\textbf{Expanding Your Horizons}\hfill Spring 2016 -- Spring 2019\\
+Taught middle school girls from at-risk communities about programming
+\\\url{https://www.eyh.cornell.edu/}
+\begin{itemize}
+	\setlength\itemsep{0em}
+	\item Created interface for introducing the concept of programming with state machines
+	\item Wrote ROS software to run state machine code on a Kuka youBot
+\end{itemize}
+\bigskip\textbf{UVa High School Programming Contest}\hfill Spring 2014 -- Spring 2015\\
+Helped plan and run the biggest programming competition for high school students in the mid-Atlantic region.
+\\\url{http://acm.cs.virginia.edu/hspc.php}
+\begin{itemize}
+	\setlength\itemsep{0em}
+	\item Created contest problems
+	\item Planned contest logistics
+	\item Helped run contest
+\end{itemize}
+\bigskip\textbf{UVa CS Education Week}\hfill Winter 2014 -- Winter 2015\\
+Visited area schools to teach workshops on introductory programming with JKarel
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------%
+% The following is copyright and licensing information for
+% redistribution of this LaTeX source code; it also includes a liability
+% statement. If this source code is not being redistributed to others,
+% it may be omitted. It has no effect on the function of the above code.
+%----------------------------------------------------------------------%
+% Copyright (c) 2007, 2008, 2009, 2010, 2011 by Theodore P. Pavlic
+%
+% Unless otherwise expressly stated, this work is licensed under the
+% Creative Commons Attribution-Noncommercial 3.0 United States License. To
+% view a copy of this license, visit
+% http://creativecommons.org/licenses/by-nc/3.0/us/ or send a letter to
+% Creative Commons, 171 Second Street, Suite 300, San Francisco,
+% California, 94105, USA.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+% IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+% CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+% TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+% SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+%----------------------------------------------------------------------%
