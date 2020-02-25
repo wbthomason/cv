@@ -130,22 +130,32 @@
 
 \usepackage{totcount}
 \usepackage{ifmtarg}
-\newtotcounter{publicationsTot}
-\newcounter{publications}
+\newtotcounter{cpublicationsTot}
+\newcounter{cpublications}
+\newtotcounter{jpublicationsTot}
+\newcounter{jpublications}
 \makeatletter
 \newcommand{\ifnonempty}[2]{\@ifnotmtarg{#1}{#2}}
 \makeatother
-\newenvironment{publication}[5][]{\addtocounter{publicationsTot}{1}\addtocounter{publications}{-1}\setlength{\parskip}{0pt}%
-  \begin{itemize}[leftmargin=*,labelindent=0pt,nolistsep]%
-    \setlength{\parskip}{0pt}%
-  \item[(\thepublications)]{#2}.\linebreak[0]\emph{#3}. #4 #5\ifnonempty{#1}{, #1}.%
-  \end{itemize}}{}
+% TODO: Find a cleaner way to define these both
+\newenvironment{confpub}[5][]{\addtocounter{cpublicationsTot}{1}\addtocounter{cpublications}{-1}\setlength{\parskip}{0pt}%
+	\begin{itemize}[leftmargin=*,labelindent=0pt,nolistsep]%
+		\setlength{\parskip}{0pt}%
+		\item[(\thecpublications)]{#2}.\linebreak[0]\emph{#3}. #4 #5\ifnonempty{#1}{, #1}.%
+	\end{itemize}}{}
+\newenvironment{journpub}[5][]{\addtocounter{jpublicationsTot}{1}\addtocounter{jpublications}{-1}\setlength{\parskip}{0pt}%
+	\begin{itemize}[leftmargin=*,labelindent=0pt,nolistsep]%
+		\setlength{\parskip}{0pt}%
+		\item[(\thejpublications)]{#2}.\linebreak[0]\emph{#3}. #4 #5\ifnonempty{#1}{, #1}.%
+	\end{itemize}}{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\setcounter{publications}{\totvalue{publicationsTot}}
-\addtocounter{publications}{1}
+\setcounter{cpublications}{\totvalue{cpublicationsTot}}
+\addtocounter{cpublications}{1}
+\setcounter{jpublications}{\totvalue{jpublicationsTot}}
+\addtocounter{jpublications}{1}
 \sloppy
 \makeheading{\huge{Wil Thomason}}
 
@@ -162,7 +172,7 @@
 \begin{tabu} to 1.0\textwidth {X[l]X[r]}
 	Cornell University             & 804.591.7318                          \\
 	Department of Computer Science & \email{wbthomason@cs.cornell.edu}     \\
-    343 Campus Road                & \url{https://www.cs.cornell.edu/~wil} \\
+	343 Campus Road                & \url{https://www.cs.cornell.edu/~wil} \\
 	Ithaca, NY 14853                                                       \\
 \end{tabu}
 
@@ -257,9 +267,9 @@ Charlottesville, VA\hfill{August 2012 -- May 2015}
 \end{innerlist}
 
 \section{Peer-Reviewed Conference Publications}
-\begin{publication}[in submission]{Ensuring Safety and Progress for Independent Multi-Robot Teams in Shared
-  Space}{\textbf{Wil Thomason}, Claire Liang, Elizabeth Ricci, and Soham Sankaran}{WAFR}{2020}
-\end{publication}
+\begin{confpub}[in submission]{Ensuring Safety and Progress for Independent Multi-Robot Teams in Shared
+		Space}{\textbf{Wil Thomason}, Claire Liang, Elizabeth Ricci, and Soham Sankaran}{WAFR}{2020}
+\end{confpub}
 
 % \textbf{Ensuring Safety and Progress for Independent Multi-Robot Teams in Shared Space}
 % \emph{WAFR (in submission)} (2020)
@@ -273,9 +283,9 @@ Charlottesville, VA\hfill{August 2012 -- May 2015}
 % 	the freespace that guarantees all robots can always eventually reach their goals.
 % \end{innerlist}\bigskip
 
-\begin{publication}[in submission]{Automatic Distributed Multi-Agent Coordination of Single-Agent
-  Robot Controllers}{\textbf{Wil Thomason}, Abhishek Anand, Greg Morrisett, Ross Knepper}{IROS}{2020}
-\end{publication}
+\begin{confpub}[in submission]{Automatic Distributed Multi-Agent Coordination of Single-Agent
+		Robot Controllers}{\textbf{Wil Thomason}, Abhishek Anand, Greg Morrisett, Ross Knepper}{IROS}{2020}
+\end{confpub}
 
 % \emph{IROS RA-L (in submission)} (2020)
 % \begin{innerlist}
@@ -287,9 +297,9 @@ Charlottesville, VA\hfill{August 2012 -- May 2015}
 % 	the system back to an earlier state.
 % \end{innerlist}\bigskip
 
-\begin{publication}{A Unified Sampling-Based Approach to Integrated Task and Motion
-  Planning}{\textbf{Wil Thomason}, Ross Knepper}{ISRR}{2019}
-\end{publication}
+\begin{confpub}{A Unified Sampling-Based Approach to Integrated Task and Motion
+		Planning}{\textbf{Wil Thomason}, Ross Knepper}{ISRR}{2019}
+\end{confpub}
 
 % \textbf{A Unified Sampling-Based Approach to Integrated Task and Motion Planning.}
 % \emph{ISRR} (2019)
@@ -304,9 +314,9 @@ Charlottesville, VA\hfill{August 2012 -- May 2015}
 % 	few domain-specific assumptions.
 % \end{innerlist}\bigskip
 
-\begin{publication}{Social Momentum: A Framework for Legible Navigation in Dynamic Multi-Agent
-  Environments}{Christoforos Mavrogiannis, \textbf{Wil Thomason}, Ross Knepper}{HRI}{2018}
-\end{publication}
+\begin{confpub}{Social Momentum: A Framework for Legible Navigation in Dynamic Multi-Agent
+		Environments}{Christoforos Mavrogiannis, \textbf{Wil Thomason}, Ross Knepper}{HRI}{2018}
+\end{confpub}
 
 % \textbf{Social Momentum: A Framework for Legible Navigation in Dynamic Multi-Agent Environments.}
 % \emph{HRI} (2018)
@@ -329,6 +339,12 @@ Charlottesville, VA\hfill{August 2012 -- May 2015}
 	gains in comprehension.
 \end{innerlist}\bigskip
 
+\section{Journal Publications}
+\begin{journpub}[in submission]{Automatic Distributed Multi-Agent Coordination of Single-Agent
+		Robot Controllers}{\textbf{Wil Thomason}, Abhishek Anand, Greg Morrisett, Ross Knepper}{Robotics
+		and Automation Letters.}{February 2020}
+\end{journpub}
+
 \textbf{An Accurate Real-Time RFID-Based Location System.}
 \emph{IJRFITA} (2016)
 \begin{innerlist}
@@ -339,11 +355,6 @@ Charlottesville, VA\hfill{August 2012 -- May 2015}
 	simultaneously locate a number of stationary and mobile objects.
 \end{innerlist}
 
-\section{Journal Publications}
-\begin{publication}[in submission]{Automatic Distributed Multi-Agent Coordination of Single-Agent
-  Robot Controllers}{\textbf{Wil Thomason}, Abhishek Anand, Greg Morrisett, Ross Knepper}{Robotics
-and Automation Letters.}{February 2020}
-\end{publication}
 
 \section{Presentations}
 
