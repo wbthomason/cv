@@ -1,23 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%% Simple LaTeX CV Template %%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% NOTE: If you find that it says                                     %%
-%%                                                                    %%
-%%                           1 of ??                                  %%
-%%                                                                    %%
-%% at the bottom of your first page, this means that the AUX file     %%
-%% was not available when you ran LaTeX on this source. Simply RERUN  %%
-%% LaTeX to get the ``??'' replaced with the number of the last page  %%
-%% of the document. The AUX file will be generated on the first run   %%
-%% of LaTeX and used on the second run to fill in all of the          %%
-%% references.                                                        %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Don't like 10pt? Try 11pt or 12pt
 \documentclass[10pt]{article}
 
 % The automated optical recognition software used to digitize resume
@@ -39,30 +19,6 @@
 % Layout: Puts the section titles on left side of page
 \reversemarginpar
 
-%
-%         PAPER SIZE, PAGE NUMBER, AND DOCUMENT LAYOUT NOTES:
-%
-% The next \usepackage line changes the layout for CV style section
-% headings as marginal notes. It also sets up the paper size as either
-% letter or A4. By default, letter was used. If A4 paper is desired,
-% comment out the letterpaper lines and uncomment the a4paper lines.
-%
-% As you can see, the margin widths and section title widths can be
-% easily adjusted.
-%
-% ALSO: Notice that the includefoot option can be commented OUT in order
-% to put the PAGE NUMBER *IN* the bottom margin. This will make the
-% effective text area larger.
-%
-% IF YOU WISH TO REMOVE THE ``of LASTPAGE'' next to each page number,
-% see the note about the +LP and -LP lines below. Comment out the +LP
-% and uncomment the -LP.
-%
-% IF YOU WISH TO REMOVE PAGE NUMBERS, be sure that the includefoot line
-% is uncommented and ALSO uncomment the \pagestyle{empty} a few lines
-% below.
-%
-
 %% Use these lines for letter-sized paper
 \usepackage[paper=letterpaper,
 	%includefoot, % Uncomment to put page number above margin
@@ -79,42 +35,16 @@
 %            margin=25mm,              % 25mm margins
 %            includemp]{geometry}
 
-%% More layout: Get rid of indenting throughout entire document
 \setlength{\parindent}{0in}
 
-\usepackage[shortlabels]{enumitem}
-
-%% Reference the last page in the page number
-%
-% NOTE: comment the +LP line and uncomment the -LP line to have page
-%       numbers without the ``of ##'' last page reference)
-%
-% NOTE: uncomment the \pagestyle{empty} line to get rid of all page
-%       numbers (make sure includefoot is commented out above)
-%
+\usepackage[shortlabels,inline]{enumitem}
 \usepackage{fancyhdr,lastpage}
-\pagestyle{fancy}
-%\pagestyle{empty}      % Uncomment this to get rid of page numbers
-\fancyhf{}\renewcommand{\headrulewidth}{0pt}
-\fancyfootoffset{\marginparsep+\marginparwidth}
-\newlength{\footpageshift}
-\setlength{\footpageshift}
-{0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
-\lfoot{\hspace{\footpageshift}%
-	\parbox{4in}{\, \hfill %
-		%                    \arabic{page} of \protect\pageref*{LastPage} % +LP
-		%\arabic{page}                               % -LP
-		\hfill \,}}
+\pagestyle{empty}
 
 % Finally, give us PDF bookmarks
 \usepackage{color,hyperref}
-\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
-\hypersetup{colorlinks,breaklinks,
-	linkcolor=darkblue,urlcolor=darkblue,
-	anchorcolor=darkblue,citecolor=darkblue}
-
-%%%%%%%%%%%%%%%%%%%%%%%% End Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\hypersetup{colorlinks,breaklinks, linkcolor=darkblue,urlcolor=darkblue, anchorcolor=darkblue,citecolor=darkblue}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -191,28 +121,31 @@
 \newcommand\doi[1]{doi:\doilink{#1}}
 
 % For \url{SOME_URL}, links SOME_URL to the url SOME_URL
-\providecommand*\url[1]{\href{#1}{#1}}
-% Same as above, but pretty-prints SOME_URL in teletype fixed-width font
-\renewcommand*\url[1]{\href{#1}{\texttt{#1}}}
+\providecommand*\url[1]{\href{#1}{\texttt{#1}}}
 
 % For \email{ADDRESS}, links ADDRESS to the url mailto:ADDRESS
-\providecommand*\email[1]{\href{mailto:#1}{#1}}
-% Same as above, but pretty-prints ADDRESS in teletype fixed-width font
-%\renewcommand*\email[1]{\href{mailto:#1}{\texttt{#1}}}
+\providecommand*\email[1]{\href{mailto:#1}{\texttt{#1}}}
 
-%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-%    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
-%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-%    \TeX}}
-\providecommand\BibTeX{{B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-\TeX}}
-\providecommand\Matlab{\textsc{Matlab}}
+\newenvironment{detaillist}{\begin{itemize}[label={},leftmargin=*,nolistsep,labelindent=10pt]}{\end{itemize}}
 
-%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{totcount}
+\usepackage{ifmtarg}
+\newtotcounter{publicationsTot}
+\newcounter{publications}
+\makeatletter
+\newcommand{\ifnonempty}[2]{\@ifnotmtarg{#1}{#2}}
+\makeatother
+\newenvironment{publication}[5][]{\addtocounter{publicationsTot}{1}\addtocounter{publications}{-1}\setlength{\parskip}{0pt}%
+  \begin{itemize}[leftmargin=*,labelindent=0pt,nolistsep]%
+    \setlength{\parskip}{0pt}%
+  \item[(\thepublications)]{#2}.\linebreak[0]\emph{#3}. #4 #5\ifnonempty{#1}{, #1}.%
+  \end{itemize}}{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+\setcounter{publications}{\totvalue{publicationsTot}}
+\addtocounter{publications}{1}
 \sloppy
 \makeheading{\huge{Wil Thomason}}
 
@@ -227,11 +160,10 @@
 \newlength{\rcollength}\setlength{\rcollength}{1.4in}%
 %
 \begin{tabu} to 1.0\textwidth {X[l]X[r]}
-	Cornell University             & 804.591.7318                      \\
-	Department of Computer Science & \email{wbthomason@cs.cornell.edu} \\
-	107 Hoy Road                   &                                   \\
-	Ithaca, NY 14853                                                   \\
-	\href{https://www.cs.cornell.edu/~wil/}{\nolinkurl{https://www.cs.cornell.edu/~wil/}}
+	Cornell University             & 804.591.7318                          \\
+	Department of Computer Science & \email{wbthomason@cs.cornell.edu}     \\
+    343 Campus Road                & \url{https://www.cs.cornell.edu/~wil} \\
+	Ithaca, NY 14853                                                       \\
 \end{tabu}
 
 \section{Objective}
@@ -254,18 +186,20 @@ coordination\\
 \section{Education}
 
 \href{https://www.cs.cornell.edu}{\textbf{Cornell University}},
-Ithaca, NY\hfill{August 2015 -- Present}
+Ithaca, NY\hfill{June 2019 -- Present}
 \begin{innerlist}
 	\item[] Ph.D., Computer Science
 \end{innerlist}\bigskip
 
 \href{https://www.cs.cornell.edu}{\textbf{Cornell University}},
-Ithaca, NY\hfill{June 2019}
+Ithaca, NY\hfill{August 2015 -- June 2019}
 \begin{innerlist}
 	\item[] MS, Computer Science
 	\item[] \textbf{Relevant Courses:}
-    Graduate Algorithms, Advanced Machine Learning, Graduate Programming Languages, Intelligent
-    Sensor Planning and Control, Mobile Robot Manipulation, Formal Methods for Robotics
+	\emph{CS 6820}: Advanced Algorithms (Fall 2015), \emph{CS 6786}: Advanced Machine Learning
+	(Spring 2016), \emph{CS 6110}: Advanced Programming Languages (Spring 2016), \emph{MAE 6790}:
+	Intelligent Sensor Planning and Control (Fall 2016), \emph{CS 6751}: Intro to Mobile
+	Manipulation (Spring 2017), \emph{MAE 6770}: Formal Methods for Robotics (Fall 2017)
 \end{innerlist}\bigskip
 
 \href{https://www.virginia.edu}{\textbf{University of Virginia}},
@@ -277,42 +211,113 @@ Charlottesville, VA\hfill{August 2012 -- May 2015}
 	Programming Languages (Fall 2014)
 \end{innerlist}
 
-\section{Publications}
+\section{Awards}
 
-\textbf{Automatic Distributed Multi-Agent Coordination of Single-Agent Robot Controllers.}
-\emph{ICRA (in submission)} (2019)
+\textbf{Outstanding Teaching Assistant Award}\\\textit{Cornell University Department of Computer Science}, May of 2017
 \begin{innerlist}
-	\item[] \emph{Wil Thomason, Abhishek Anand, Greg Morrisett, Ross Knepper.}
-	\item[] We present a framework for automatically transforming single-agent robot controllers
-	into distributed multi-agent controllers with guaranteed safety and progress under lightweight
-	assumptions. The core of this framework is a simple protocol that maintains two invariants:
-	(a) all executed actions are non-colliding, and (b) there is always a valid plan to reverse
-	the system back to an earlier state.
+	\item[] Awarded for my work as a TA for the new Foundations of Robotics course in Fall 2016,
+	taught by Ross Knepper.
 \end{innerlist}\bigskip
 
-\textbf{A Unified Sampling-Based Approach to Integrated Task and Motion Planning.}
-\emph{ISRR} (2019)
+\textbf{NDSEG Fellow} \hfill \textit{American Society for Engineering Education}, April of 2017
 \begin{innerlist}
-	\item[] \emph{Wil Thomason, Ross Knepper}.
-	\item[] We contribute a novel approach to integrated task and motion planning that adapts any
-	off-the-shelf motion planning algorithm to automatically solve \emph{task and motion planning
-		problems}. We construct a state space embedding the full symbolic and continuous state of a
-	planning problem into a single highly factorable space. Combined with a continuous semantics
-	for Boolean predicates, which we use to derive navigation functions to task-level salient
-	regions of the continuous space, we can efficiently solve complex manipulation problems with
-	few domain-specific assumptions.
+	\item[] The National Defense Science and Engineering Graduate (NDSEG) Fellowship is a highly
+	competitive, portable fellowship that is awarded to U.S. citizens and nationals who intend to
+	pursue a doctoral degree in one of fifteen supported disciplines. NDSEG confers high honors
+	upon its recipients, and allows them to attend whichever U.S. institution they choose.
+	(\url{https://ndseg.asee.org/})
 \end{innerlist}\bigskip
 
-\textbf{Social Momentum: A Framework for Legible Navigation in Dynamic Multi-Agent Environments.}
-\emph{HRI} (2018)
+\textbf{NSF GRFP Fellow} \hfill \textit{The National Science Foundation}, March of 2017
 \begin{innerlist}
-	\item[] \emph{Christoforos Mavrogiannis, Wil Thomason, Ross Knepper.}
-	\item[] We design a planning framework that aims at generating motion that clearly communicates
-	an agent’s intended collision avoidance strategy rather than its destination. Our framework
-	estimates the most likely intended avoidance protocols of others based on their past
-	behaviors, superimposes them, and generates an expressive and socially compliant robot action
-	that reinforces the expectations of others regarding these avoidance protocols.
+	\item[] The NSF Graduate Research Fellowship Program recognizes and supports outstanding
+	graduate students in NSF-supported science, technology, engineering, and mathematics
+	disciplines who are pursuing research-based Master's and doctoral degrees at accredited United
+	States institutions. (\url{https://www.nsfgrfp.org/})
 \end{innerlist}\bigskip
+
+\textbf{Outstanding Teaching Assistant Award}\\\textit{Cornell University Department of Computer Science}, May of 2016
+\begin{innerlist}
+	\item[] Awarded for my work as a TA for the Intro to Python course (CS 1110) in Fall 2015,
+	taught by Walker White.
+\end{innerlist}\bigskip
+
+\textbf{NSF GRFP Honorable Mention} \hfill \textit{The National Science Foundation}, March of 2016
+\begin{innerlist}
+	\item[] The NSF Graduate Research Fellowship Program recognizes and supports outstanding
+	graduate students in NSF-supported science, technology, engineering, and mathematics
+	disciplines who are pursuing research-based Master's and doctoral degrees at accredited United
+	States institutions.(\url{https://www.nsfgrfp.org/})
+\end{innerlist}\bigskip
+
+\textbf{Louis T. Rader Outstanding Education Undergraduate Student Award} \hfill \textit{University of Virginia Department of Computer Science}, May of 2015
+\begin{innerlist}
+	\item[] Awarded for my work for several years as a TA for multiple courses in the computer
+	science department at UVA.
+\end{innerlist}
+
+\section{Peer-Reviewed Conference Publications}
+\begin{publication}[in submission]{Ensuring Safety and Progress for Independent Multi-Robot Teams in Shared
+  Space}{\textbf{Wil Thomason}, Claire Liang, Elizabeth Ricci, and Soham Sankaran}{WAFR}{2020}
+\end{publication}
+
+% \textbf{Ensuring Safety and Progress for Independent Multi-Robot Teams in Shared Space}
+% \emph{WAFR (in submission)} (2020)
+% \begin{innerlist}
+% 	\item[] \emph{Wil Thomason, Claire Liang, Elizabeth Ricci, Soham Sankaran}
+% 	\item[] We present a framework for guaranteeing safety and progress for all robots operating in a
+% 	shared environment containing multiple independent multi-robot teams. Our technique uses a
+% 	partition of the freespace into \emph{flow regions} and \emph{open space} to avoid deadlock in
+% 	narrow passageways and provide a mechanism for dynamically redistributing robot density in the
+% 	environment, and constructs a simple priority-based protocol for requesting access to a spot in
+% 	the freespace that guarantees all robots can always eventually reach their goals.
+% \end{innerlist}\bigskip
+
+\begin{publication}[in submission]{Automatic Distributed Multi-Agent Coordination of Single-Agent
+  Robot Controllers}{\textbf{Wil Thomason}, Abhishek Anand, Greg Morrisett, Ross Knepper}{IROS}{2020}
+\end{publication}
+
+% \emph{IROS RA-L (in submission)} (2020)
+% \begin{innerlist}
+% 	\item[] \emph{Wil Thomason, Abhishek Anand, Greg Morrisett, Ross Knepper.}
+% 	\item[] We present a framework for automatically transforming single-agent robot controllers
+% 	into distributed multi-agent controllers with guaranteed safety and progress under lightweight
+% 	assumptions. The core of this framework is a simple protocol that maintains two invariants:
+% 	(a) all executed actions are non-colliding, and (b) there is always a valid plan to reverse
+% 	the system back to an earlier state.
+% \end{innerlist}\bigskip
+
+\begin{publication}{A Unified Sampling-Based Approach to Integrated Task and Motion
+  Planning}{\textbf{Wil Thomason}, Ross Knepper}{ISRR}{2019}
+\end{publication}
+
+% \textbf{A Unified Sampling-Based Approach to Integrated Task and Motion Planning.}
+% \emph{ISRR} (2019)
+% \begin{innerlist}
+% 	\item[] \emph{Wil Thomason, Ross Knepper}.
+% 	\item[] We contribute a novel approach to integrated task and motion planning that adapts any
+% 	off-the-shelf motion planning algorithm to automatically solve \emph{task and motion planning
+% 		problems}. We construct a state space embedding the full symbolic and continuous state of a
+% 	planning problem into a single highly factorable space. Combined with a continuous semantics
+% 	for Boolean predicates, which we use to derive navigation functions to task-level salient
+% 	regions of the continuous space, we can efficiently solve complex manipulation problems with
+% 	few domain-specific assumptions.
+% \end{innerlist}\bigskip
+
+\begin{publication}{Social Momentum: A Framework for Legible Navigation in Dynamic Multi-Agent
+  Environments}{Christoforos Mavrogiannis, \textbf{Wil Thomason}, Ross Knepper}{HRI}{2018}
+\end{publication}
+
+% \textbf{Social Momentum: A Framework for Legible Navigation in Dynamic Multi-Agent Environments.}
+% \emph{HRI} (2018)
+% \begin{innerlist}
+% 	\item[] \emph{Christoforos Mavrogiannis, Wil Thomason, Ross Knepper.}
+% 	\item[] We design a planning framework that aims at generating motion that clearly communicates
+% 	an agent’s intended collision avoidance strategy rather than its destination. Our framework
+% 	estimates the most likely intended avoidance protocols of others based on their past
+% 	behaviors, superimposes them, and generates an expressive and socially compliant robot action
+% 	that reinforces the expectations of others regarding these avoidance protocols.
+% \end{innerlist}\bigskip
 
 \textbf{Zero-Shot Learning for Unfamiliar Gesture Recognition.}
 \emph{ISER} (2016)
@@ -334,52 +339,19 @@ Charlottesville, VA\hfill{August 2012 -- May 2015}
 	simultaneously locate a number of stationary and mobile objects.
 \end{innerlist}
 
-\section{Awards}
-
-\textbf{Outstanding Teaching Assistant Award}\\\textit{Cornell University Department of Computer Science}, May 2017
-\begin{innerlist}
-	\item[] Awarded for my work as a TA for the new Foundations of Robotics course in Fall 2016,
-	taught by Ross Knepper.
-\end{innerlist}\bigskip
-
-\textbf{NDSEG Fellow} \hfill \textit{American Society for Engineering Education}, April 2017
-\begin{innerlist}
-	\item[] The National Defense Science and Engineering Graduate (NDSEG) Fellowship is a highly
-	competitive, portable fellowship that is awarded to U.S. citizens and nationals who intend to
-	pursue a doctoral degree in one of fifteen supported disciplines. NDSEG confers high honors
-	upon its recipients, and allows them to attend whichever U.S. institution they choose.
-	(\url{https://ndseg.asee.org/})
-\end{innerlist}\bigskip
-
-\textbf{NSF GRFP Fellow} \hfill \textit{The National Science Foundation}, March 2017
-\begin{innerlist}
-	\item[] The NSF Graduate Research Fellowship Program recognizes and supports outstanding
-	graduate students in NSF-supported science, technology, engineering, and mathematics
-	disciplines who are pursuing research-based Master's and doctoral degrees at accredited United
-	States institutions. (\url{https://www.nsfgrfp.org/})
-\end{innerlist}\bigskip
-
-\textbf{Outstanding Teaching Assistant Award}\\\textit{Cornell University Department of Computer Science}, May 2016
-\begin{innerlist}
-	\item[] Awarded for my work as a TA for the Intro to Python course (CS 1110) in Fall 2015,
-	taught by Walker White.
-\end{innerlist}\bigskip
-
-\textbf{NSF GRFP Honorable Mention} \hfill \textit{The National Science Foundation}, March 2016
-\begin{innerlist}
-	\item[] The NSF Graduate Research Fellowship Program recognizes and supports outstanding
-	graduate students in NSF-supported science, technology, engineering, and mathematics
-	disciplines who are pursuing research-based Master's and doctoral degrees at accredited United
-	States institutions.(\url{https://www.nsfgrfp.org/})
-\end{innerlist}\bigskip
-
-\textbf{Louis T. Rader Outstanding Education Undergraduate Student Award} \hfill \textit{University of Virginia Department of Computer Science}, May 2015
-\begin{innerlist}
-	\item[] Awarded for my work for several years as a TA for multiple courses in the computer
-	science department at UVA.
-\end{innerlist}
+\section{Journal Publications}
+\begin{publication}[in submission]{Automatic Distributed Multi-Agent Coordination of Single-Agent
+  Robot Controllers}{\textbf{Wil Thomason}, Abhishek Anand, Greg Morrisett, Ross Knepper}{Robotics
+and Automation Letters.}{February 2020}
+\end{publication}
 
 \section{Presentations}
+
+``A Unified Sampling-Based Approach to Integrated Task and Motion Planning.''\\
+\emph{ISRR 2019}\hfill October 09, 2019
+\begin{innerlist}
+	\item[] \url{https://h2t-projects.webarchiv.kit.edu/Projects/\\ISRR2019/index.php/program-and-talks/program/}
+\end{innerlist}\bigskip
 
 ``A Flexible Sampling-Based Approach to Task and Motion Planning.''\\
 \emph{RSS 2019 Workshop on Robust Task and Motion Planning}\hfill
@@ -423,21 +395,56 @@ June 19th, 2016
 	\item[] \url{http://www.ece.rochester.edu/projects/rail/mlhrc2016/}
 \end{innerlist}
 
+\section{Service}
+
+I have served as a reviewer for ICRA (2016, 2019, 2020), IROS (2019), MRS (2019), RO-MAN (2016), RSS
+(2019), WAFR (2018), AURO, and SIMPAR (2018).
+I have also served as a reviewer and mentor for \hyperlink{https://blackinai.github.io/}{Black in
+	AI}, a workshop at NeurIPS that works to promote and increase the
+presence of Black people in the field of artificial intelligence (2017--2019).
+
+\section{Outreach}
+
+\textbf{Expanding Your Horizons}\hfill Spring 2016 -- Spring 2019\\
+Taught middle school girls from the community about programming
+\\\url{https://www.eyh.cornell.edu/}
+\begin{itemize}
+	\setlength\itemsep{0em}
+	\item Created interface for introducing the concept of programming with state machines
+	\item Wrote ROS software to run state machine code on a Kuka youBot
+\end{itemize}
+\bigskip\textbf{UVa High School Programming Contest}\hfill Spring 2014 -- Spring 2015\\
+Helped plan and run the biggest programming competition for high school students in the mid-Atlantic region.
+\\\url{http://acm.cs.virginia.edu/hspc.php}
+\begin{itemize}
+	\setlength\itemsep{0em}
+	\item Created contest problems
+	\item Planned contest logistics
+	\item Helped run contest
+\end{itemize}
+\bigskip\textbf{UVa CS Education Week}\hfill Winter 2014 -- Winter 2015\\
+Visited area schools to teach workshops on introductory programming with JKarel.
+
 \section{Research Experience}
-\textbf{Graduate Research Assistant} \hfill {August 2015 -- Present}\\
+\textbf{Graduate Research Assistant} \hfill {January 2020 -- Present}\\
 \emph{Cornell University, Department of Computer Science}
 \begin{innerlist}
-	\item[] Advised by Professor Ross Knepper, I have studied problems in the domains of integrated
-	task and motion planning, human-robot interaction and multi-agent planning. Specifically, I
-	have made advances in efficient task and motion planning, gesture recognition, and
-	coordination for ad hoc teams of heterogeneous robots. This work has resulted in several
-	publications and presentations, and is ongoing.
+	\item[] I am continuing my work on integrated task and motion planning with Professor Hadas
+	Kress-Gazit.
+\end{innerlist}\bigskip
+
+\textbf{Graduate Research Assistant} \hfill {August 2015 -- December 2019}\\
+\emph{Cornell University, Department of Computer Science}
+\begin{innerlist}
+	\item[] Work with Professor Ross Knepper on problems in the domains of integrated
+	task and motion planning, human-robot interaction and multi-agent planning.
+	See publications co-authored with Professor Knepper.
 \end{innerlist}\bigskip
 
 \textbf{Undergraduate Research Assistant} \hfill {August 2014 -- July 2015}\\
 \emph{The University of Virginia, Department of Computer Science}
 \begin{innerlist}
-	\item[] I worked with Professor Westley Weimer on automatic software functionality
+	\item[] Work with Professor Westley Weimer on automatic software functionality
 	transplantation. We developed an algorithm based on analyzing differences in test suite
 	performance to identify software modules responsible for specific functionality and a
 	combination of function dependency tracing and extraction with the GenProg program repair tool
@@ -447,54 +454,10 @@ June 19th, 2016
 \textbf{Undergraduate Research Assistant} \hfill {January 2013 -- May 2014}\\
 \emph{The University of Virginia, Department of Computer Science}
 \begin{innerlist}
-	\item[] As a part of Professor Gabriel Robins' lab, I helped to create an efficient, scalable
-	system for real-time localization of objects in 3D space using passive RFID tags. In addition
-	to designing and running experiments for the system, I researched and created a novel approach
-	to distinguishing between noisy measurements and measurements corresponding to moving objects.
-	This approach, which was based on a sliding-window particle filter, significantly increased
-	the accuracy of our system. This work resulted in a journal publication.
+	\item[] Work with Professor Gabriel Robins on efficient, scalable,
+	real-time localization of objects in 3D space using passive RFID tags.
+	See publication ``An Accurate Real-Time RFID-Based Location System''.
 \end{innerlist}
-
-\section{Industry Experience}
-
-\textbf{Software Engineering Intern at Fluencia}\hfill May 2015 -- August 2015\\
-Worked on adding voice understanding for speech practice exercises
-\begin{itemize}
-	\setlength\itemsep{0em}
-	\item Improved voice understanding software
-	\item Integrated into language learning website
-	\item Created test and development framework for voice exercises
-\end{itemize}\bigskip
-
-\textbf{Software Development Engineer Intern at Microsoft}\hfill May 2014 -- August 2014\\
-Microsoft Accounts Client Team
-\begin{itemize}
-	\setlength\itemsep{0em}
-	\item Implemented and tested cryptographic operations and network protocol for forthcoming
-	      feature in Microsoft Accounts Android app. The implemented feature enables more convenient and
-	      more secure sign-in for Microsoft accounts via mobile devices.
-	\item Coordinated the work of several other interns working on related components of the same
-	      project to ensure successful integration and delivery of the fully-functional feature ahead of
-	      schedule.
-\end{itemize}\bigskip
-
-\textbf{Software Development Engineer Intern at Microsoft}\hfill May 2013 -- August 2013\\
-Xbox LIVE Cloud Security Team
-\begin{itemize}
-	\setlength\itemsep{0em}
-	\item Designed, implemented, and shipped a RESTful web service capable of logging and auditing
-	      security records in Xbox LIVE in real time. Also designed, created, and tuned associated
-	      database and procedures. Service is currently in use in the Xbox LIVE network.
-	\item Spearheaded and completed a total rewrite of an important development library – starting
-	      with old, cobbled together library used across principal components of the Xbox LIVE network,
-	      redesigned and reimplemented the entire library to provide a faster and easier to use
-	      interface to the same core functionality.
-\end{itemize}
-
-\section{Technical\\ Skills}
-
-\textbf{Programming Languages:} C++, Python, Rust, C, CL, Haskell, OCaml\\
-\textbf{Technologies:} Linux, ROS, OMPL, PyTorch, TensorFlow, Git, CUDA
 
 \section{Teaching Experience}
 
@@ -547,32 +510,51 @@ Xbox LIVE Cloud Security Team
 	\item[] TA for UVA's undergraduate data structures and C++ programming course.
 \end{innerlist}
 
+\section{Industry Experience}
+
+\textbf{Software Engineering Intern at Fluencia}\hfill May 2015 -- August 2015\\
+Worked on adding voice understanding for speech practice exercises
+\begin{itemize}
+	\setlength\itemsep{0em}
+	\item Improved voice understanding software
+	\item Integrated into language learning website
+	\item Created test and development framework for voice exercises
+\end{itemize}\bigskip
+
+\textbf{Software Development Engineer Intern at Microsoft}\hfill May 2014 -- August 2014\\
+Microsoft Accounts Client Team
+\begin{itemize}
+	\setlength\itemsep{0em}
+	\item Implemented and tested cryptographic operations and network protocol for forthcoming
+	      feature in Microsoft Accounts Android app. The implemented feature enables more convenient and
+	      more secure sign-in for Microsoft accounts via mobile devices.
+	\item Coordinated the work of several other interns working on related components of the same
+	      project to ensure successful integration and delivery of the fully-functional feature ahead of
+	      schedule.
+\end{itemize}\bigskip
+
+\textbf{Software Development Engineer Intern at Microsoft}\hfill May 2013 -- August 2013\\
+Xbox LIVE Cloud Security Team
+\begin{itemize}
+	\setlength\itemsep{0em}
+	\item Designed, implemented, and shipped a RESTful web service capable of logging and auditing
+	      security records in Xbox LIVE in real time. Also designed, created, and tuned associated
+	      database and procedures. Service is currently in use in the Xbox LIVE network.
+	\item Spearheaded and completed a total rewrite of an important development library – starting
+	      with old, cobbled together library used across principal components of the Xbox LIVE network,
+	      redesigned and reimplemented the entire library to provide a faster and easier to use
+	      interface to the same core functionality.
+\end{itemize}
+
+\section{Technical Skills}
+
+\textbf{Programming Languages:} C++, Python, Rust, C, CL, Haskell, OCaml, etc.\\
+\textbf{Technologies:} Linux, ROS, OMPL, PyTorch, TensorFlow, Git, CUDA, etc.
+
 \section{Languages}
 
 English \emph{(Fluency: Native speaker)}\\
 German \emph{(Fluency: Working)}
-
-\section{Outreach}
-
-\textbf{Expanding Your Horizons}\hfill Spring 2016 -- Spring 2019\\
-Taught middle school girls from at-risk communities about programming
-\\\url{https://www.eyh.cornell.edu/}
-\begin{itemize}
-	\setlength\itemsep{0em}
-	\item Created interface for introducing the concept of programming with state machines
-	\item Wrote ROS software to run state machine code on a Kuka youBot
-\end{itemize}
-\bigskip\textbf{UVa High School Programming Contest}\hfill Spring 2014 -- Spring 2015\\
-Helped plan and run the biggest programming competition for high school students in the mid-Atlantic region.
-\\\url{http://acm.cs.virginia.edu/hspc.php}
-\begin{itemize}
-	\setlength\itemsep{0em}
-	\item Created contest problems
-	\item Planned contest logistics
-	\item Helped run contest
-\end{itemize}
-\bigskip\textbf{UVa CS Education Week}\hfill Winter 2014 -- Winter 2015\\
-Visited area schools to teach workshops on introductory programming with JKarel
 \end{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
