@@ -114,6 +114,7 @@
 {\begin{itemize}[#1,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt]}
 		{\end{itemize}\vspace{-.6\baselineskip}}
 
+% Fake "subsections" through bolded list items with good spacing
 \newenvironment{loneboldlist}%
 {\begin{description}[leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt]}
 		{\end{description}\vspace{-.6\baselineskip}}
@@ -134,8 +135,10 @@
 % For \email{ADDRESS}, links ADDRESS to the url mailto:ADDRESS
 \providecommand*\email[1]{\href{mailto:#1}{\texttt{#1}}}
 
+% Environment for compact, bullet-free lists of items
 \newenvironment{detaillist}{\begin{itemize}[label={},leftmargin=*,nolistsep,labelindent=10pt]}{\end{itemize}}
 
+% Environments for conference and journal publications
 \newtotcounter{cpublicationsTot}
 \newcounter{cpublications}
 \newtotcounter{jpublicationsTot}
@@ -144,16 +147,27 @@
 \newcommand{\ifnonempty}[2]{\@ifnotmtarg{#1}{#2}}
 \makeatother
 \newenvironment{publication}[6][]{\setlength{\parskip}{0pt}%
-	\begin{itemize}[leftmargin=*,labelindent=0pt,nolistsep]%
+	\begin{itemize}[leftmargin=0.5cm,labelindent=0pt,nolistsep]%
 		\item[#2.]\emph{#3}.~{#4}. #5 #6\ifnonempty{#1}{, #1}.}{\end{itemize}}
 \newenvironment{confpub}[5][]{\addtocounter{cpublicationsTot}{1}\addtocounter{cpublications}{-1}
 	\begin{publication}[#1]{\thecpublications}{#2}{#3}{#4}{#5}\end{publication}}{}
 \newenvironment{journpub}[5][]{\addtocounter{jpublicationsTot}{1}\addtocounter{jpublications}{-1}
 	\begin{publication}[#1]{\thejpublications}{#2}{#3}{#4}{#5}\end{publication}}{}
 
+% Environment for awards
 \newenvironment{award}[3]{\setlength{\parskip}{0pt}%
-	\begin{itemize}[label={},leftmargin=*,labelindent=0pt,nolistsep]%
+	\begin{itemize}[label={},leftmargin=0cm,labelindent=0pt,nolistsep]%
 		\item\textbf{#1}\hfill\quad{#3}\linebreak[1]~\emph{#2}}{\end{itemize}\medskip}
+
+% Environment for courses
+\newenvironment{class}[4]{\setlength{\parskip}{0pt}%
+	\begin{itemize}[label={},leftmargin=0cm,labelindent=0pt,nolistsep]%
+		\item\textbf{#1}~\emph{({#2})}~\hfill\emph{#3}, #4}{\end{itemize}\medskip}
+
+% Environment for work experience items
+          \newenvironment{job}[3]{\setlength{\parskip}{0pt}%
+	\begin{itemize}[label={},leftmargin=0cm,labelindent=0pt,nolistsep]%
+		\item\textbf{#1}~\hfill\emph{#2}\\{#3}.}{\end{itemize}\medskip}
 %%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
@@ -194,24 +208,90 @@
 
 \section{Research Interests}
 
-\textbf{Robotics}: integrated task and motion planning, constrained planning, formal methods for
-robotics, synthesis, motion planning, multi-agent coordination\\
-\textbf{Machine Learning}: learning to plan, combining ML with classical planning
+Robotics, integrated task and motion planning, ML for planning, constrained planning, formal methods
+for robotics, synthesis, motion planning, multi-agent coordination
 % \textbf{Programming Languages}: type theory, effect systems, compilers
 
+\section{Professional Experience}
+\begin{job}{Graduate Research Assistant}{January 2020 --
+		Present}{\href{http://verifiablerobotics.com}{VRRG}, Department of Computer Science, Cornell University}
+\end{job}
+
+\begin{job}{Graduate Research Assistant}{August 2015 -- December 2019}{Robotic Personal Assistants
+		Lab, Department of Computer
+		Science, Cornell University}
+	% \item Work with Professor Ross Knepper on problems in the domains of integrated
+	% task and motion planning, human-robot interaction and multi-agent planning.
+	% See publications co-authored with Professor Knepper.
+\end{job}
+
+\begin{job}{Software Engineering Intern}{May 2015 -- August 2015}{Fluencia, Alexandria,
+		VA}
+	Worked on adding voice recognition for speech practice exercises.
+	% \begin{itemize}
+	% 	\setlength\itemsep{0em}
+	% 	\item Improved voice understanding software
+	% 	\item Integrated into language learning website
+	% 	\item Created test and development framework for voice exercises
+	% \end{itemize}
+\end{job}
+
+\begin{job}{Undergraduate Research Assistant}{August 2014 -- July 2015}{Department of Computer
+		Science, The University of Virginia}
+	Work with Professor Westley Weimer on automatic software functionality transplantation.
+	% We developed an algorithm based on analyzing differences in test suite
+	% performance to identify software modules responsible for specific functionality and a
+	% combination of function dependency tracing and extraction with the GenProg program repair tool
+	% to perform transplants.
+\end{job}
+
+\begin{job}{Software Development Engineer Intern}{May 2014 -- August 2014}{Accounts Client Team,
+		Microsoft, Redmond, WA}
+	Implemented cryptographic operations and network protocol for passwordless login feature in
+	Microsoft Accounts Android app.
+	% \begin{itemize}
+	% 	\setlength\itemsep{0em}
+	% 	\item Implemented and tested cryptographic operations and network protocol for forthcoming
+	% 	      feature in Microsoft Accounts Android app. The implemented feature enables more convenient and
+	% 	      more secure sign-in for Microsoft accounts via mobile devices.
+	% 	\item Coordinated the work of several other interns working on related components of the same
+	% 	      project to ensure successful integration and delivery of the fully-functional feature ahead of
+	% 	      schedule.
+	% \end{itemize}
+\end{job}
+
+\begin{job}{Software Development Engineer Intern}{May 2013 -- August 2013}{Xbox LIVE Cloud Security
+		Team, Microsoft, Redmond, WA}
+	Designed and implemented a service for real-time logging and auditing of security records in
+	Xbox LIVE. Initiated and completed a rewrite of an internal library to improve performance and
+	provide a better API.
+	% \begin{itemize}
+	% 	\setlength\itemsep{0em}
+	% 	\item Designed, implemented, and shipped a RESTful web service capable of logging and auditing
+	% 	      security records in Xbox LIVE in real time. Also designed, created, and tuned associated
+	% 	      database and procedures. Service is currently in use in the Xbox LIVE network.
+	% 	\item Spearheaded and completed a total rewrite of an important development library – starting
+	% 	      with old, cobbled together library used across principal components of the Xbox LIVE network,
+	% 	      redesigned and reimplemented the entire library to provide a faster and easier to use
+	% 	      interface to the same core functionality.
+	% \end{itemize}
+\end{job}
+
+\begin{job}{Undergraduate Research Assistant}{January 2013 -- May 2014}{Department of Computer
+		Science, The University of Virginia}
+	Work with Professor Gabriel Robins on real-time localization of objects using passive RFID tags.
+	% See publication ``An Accurate Real-Time RFID-Based Location System''.
+\end{job}
+
 \section{Education}
-\href{https://www.cs.cornell.edu}{\textbf{Cornell University}},
-Ithaca, NY\hfill{Present}
+\textbf{Cornell University}, Ithaca, NY\hfill{Present}
 \begin{detaillist}
-	\item\emph{Ph.D. in Computer Science}
-	\item Advisor: Hadas Kress-Gazit
+	\item\emph{Ph.D. in Computer Science}. Advisor: Hadas Kress-Gazit.
 \end{detaillist}\medskip
 
-\href{https://www.cs.cornell.edu}{\textbf{Cornell University}},
-Ithaca, NY\hfill{June 2019}
+\textbf{Cornell University}, Ithaca, NY\hfill{June 2019}
 \begin{detaillist}
-	\item\emph{MS in Computer Science}
-	\item Advisor: Ross A. Knepper
+	\item\emph{MS in Computer Science}. Advisor: Ross A. Knepper.
 	% \item \textbf{Relevant Courses:}
 	% \emph{CS 6820}: Advanced Algorithms (Fall 2015), \emph{CS 6786}: Advanced Machine Learning
 	% (Spring 2016), \emph{CS 6110}: Advanced Programming Languages (Spring 2016), \emph{MAE 6790}:
@@ -219,8 +299,7 @@ Ithaca, NY\hfill{June 2019}
 	% Manipulation (Spring 2017), \emph{MAE 6770}: Formal Methods for Robotics (Fall 2017)
 \end{detaillist}\medskip
 
-\href{https://www.virginia.edu}{\textbf{University of Virginia}},
-Charlottesville, VA\hfill{August 2012 -- May 2015}
+\textbf{University of Virginia}, Charlottesville, VA\hfill{August 2012 -- May 2015}
 \begin{detaillist}
 	\item\emph{BS (with high distinction) in Computer Science and Mathematics}
 	% \item \textbf{Relevant Courses:}
@@ -323,10 +402,9 @@ Charlottesville, VA\hfill{August 2012 -- May 2015}
 		and Automation Letters.}{February 2020}
 \end{journpub}
 
-\begin{journpub}{An Accurate Real-Time RFID-Based Location System}{Kirti Chawla, Christopher
+\begin{journpub}[authors listed in alphabetical order]{An Accurate Real-Time RFID-Based Location System}{Kirti Chawla, Christopher
 		McFarland, Gabriel Robins, \textbf{Wil Thomason}}{International Journal of Radio Frequency
-		Identification Technology and Applications}{2016}
-	\emph{(Authors listed in alphabetical order)}
+		Identification Technology and Applications.}{July 2016}
 	% We outline an RFID-based object localization framework addressing challenges of
 	% performance and applicability and propose the use of Received Signal Strength (RSS) to model
 	% the behavior of radio signals decaying over distance in an orientation-agnostic manner to
@@ -361,155 +439,80 @@ A. Knepper.
 Learning.'' June 19th, 2016. \emph{2nd Workshop on Model Learning for Human-Robot Communication, RSS 2016}
 % \url{http://www.ece.rochester.edu/projects/rail/mlhrc2016/}
 
-\section{Service}
-
-\textbf{Reviewer:} ICRA (2016, 2019, 2020), IROS (2019), MRS (2019), RO-MAN (2016), RSS (2019), WAFR (2018), AURO, and SIMPAR (2018).
-
-\section{Outreach}
-I have also served as a reviewer and mentor for \hyperlink{https://blackinai.github.io/}{Black in
-	AI}, a workshop at NeurIPS that works to promote and increase the
-presence of Black people in the field of artificial intelligence (2017--2019).
-
-\textbf{Expanding Your Horizons}\hfill Spring 2016 -- Spring 2019\\
-Taught middle school girls from the community about programming
-\\\url{https://www.eyh.cornell.edu/}
-\begin{itemize}
-	\setlength\itemsep{0em}
-	\item Created interface for introducing the concept of programming with state machines
-	\item Wrote ROS software to run state machine code on a Kuka youBot
-\end{itemize}
-\medskip\textbf{UVa High School Programming Contest}\hfill Spring 2014 -- Spring 2015\\
-Helped plan and run the biggest programming competition for high school students in the mid-Atlantic region.
-\\\url{http://acm.cs.virginia.edu/hspc.php}
-\begin{itemize}
-	\setlength\itemsep{0em}
-	\item Created contest problems
-	\item Planned contest logistics
-	\item Helped run contest
-\end{itemize}
-\medskip\textbf{UVa CS Education Week}\hfill Winter 2014 -- Winter 2015\\
-Visited area schools to teach workshops on introductory programming with JKarel.
-
-\section{Research Experience}
-\textbf{Graduate Research Assistant} \hfill {January 2020 -- Present}\\
-\emph{Cornell University, Department of Computer Science}
-\begin{innerlist}
-	\item[] I am continuing my work on integrated task and motion planning with Professor Hadas
-	Kress-Gazit.
-\end{innerlist}\medskip
-
-\textbf{Graduate Research Assistant} \hfill {August 2015 -- December 2019}\\
-\emph{Cornell University, Department of Computer Science}
-\begin{innerlist}
-	\item[] Work with Professor Ross Knepper on problems in the domains of integrated
-	task and motion planning, human-robot interaction and multi-agent planning.
-	See publications co-authored with Professor Knepper.
-\end{innerlist}\medskip
-
-\textbf{Undergraduate Research Assistant} \hfill {August 2014 -- July 2015}\\
-\emph{The University of Virginia, Department of Computer Science}
-\begin{innerlist}
-	\item[] Work with Professor Westley Weimer on automatic software functionality
-	transplantation. We developed an algorithm based on analyzing differences in test suite
-	performance to identify software modules responsible for specific functionality and a
-	combination of function dependency tracing and extraction with the GenProg program repair tool
-	to perform transplants.
-\end{innerlist}\medskip
-
-\textbf{Undergraduate Research Assistant} \hfill {January 2013 -- May 2014}\\
-\emph{The University of Virginia, Department of Computer Science}
-\begin{innerlist}
-	\item[] Work with Professor Gabriel Robins on efficient, scalable,
-	real-time localization of objects in 3D space using passive RFID tags.
-	See publication ``An Accurate Real-Time RFID-Based Location System''.
-\end{innerlist}
-
 \section{Teaching Experience}
 
-\textbf{Graduate Teaching Assistant: CS 4750} \hfill Fall 2016 \& Fall 2017\\
-\emph{Cornell University}
-\begin{innerlist}
-	\item[] TA for Foundations of Robotics: A new course designed to introduce students to the
-	knowledge they need to conduct research in robotics. I helped to create the course syllabus,
-	textbook, and software for course assignments, and was also responsible for giving weekly
-	office hours, grading, and assisting with lecturing.
-\end{innerlist}\medskip
+\begin{class}{CS 4750}{Foundations of Robotics}{Cornell University}{Fall 2016 \& Fall 2017}
+	\item Graduate TA (syllabus creation, coding project creation and implementation, grading, office hours,
+	occasional lecturing). Senior and graduate-level elective.
+\end{class}
 
-\textbf{Graduate Teaching Assistant: CS 1110} \hfill Fall 2015\\
-\emph{Cornell University}
-\begin{innerlist}
-	\item[] Head TA for Cornell's introductory computer science course. Responsible for coordinating
-	TA staff, giving review lectures, supervising lab sessions, grading, and giving weekly office
-	hours.
-\end{innerlist}\medskip
+\begin{class}{CS 1110}{Introduction to Computing Using Python}{Cornell University}{Fall 2015}
+	\item Head graduate TA (coordinating staff, giving review lectures, supervising lab sessions, grading,
+	office hours). Introductory undergraduate CS course.
+\end{class}
 
-\textbf{Instructor: Introduction to Robotics} \hfill Spring 2015\\
-\emph{University of Virginia}
-\begin{innerlist}
-	\item[] I designed and taught a 1-credit course introducing undergraduate students to core
-	topics in robotics. As a part of the course, students built and programmed their own quadrotor
-	robots and learned about basic kinematics, control, perception, and learning.
-\end{innerlist}\medskip
+\begin{class}{ENG 1501}{Introduction to Aerial Robotics}{University of Virginia}{Fall 2014}
+	\item Instructor. Designed and taught 1-credit special-topics undergraduate elective introducing
+	core topics in robotics. Students built and programmed their own quadrotor robots and learned
+	about basic kinematics, control, and perception.
+\end{class}
 
-\textbf{Undergraduate Teaching Assistant: CS 4610} \hfill Spring 2015\\
-\emph{University of Virginia}
-\begin{innerlist}
-	\item[] TA for UVA's undergraduate programming languages course.
-\end{innerlist}\medskip
+\begin{class}{CS 4610}{Programming Languages}{University of Virginia}{Spring 2015}
+	\item Undergraduate TA. Senior-level elective.
+\end{class}
 
-\textbf{Undergraduate Teaching Assistant: CS 4710} \hfill Spring 2015\\
-\emph{University of Virginia}
-\begin{innerlist}
-	\item[] TA for UVA's undergraduate artificial intelligence course.
-\end{innerlist}\medskip
+\begin{class}{CS 4710}{Artificial Intelligence}{University of Virginia}{Spring 2015}
+	\item Undergraduate TA. Senior-level elective.
+\end{class}
 
-\textbf{Undergraduate Teaching Assistant: CS 4414} \hfill Spring 2014\\
-\emph{University of Virginia}
-\begin{innerlist}
-	\item[] TA for UVA's undergraduate operating systems course. Helped create course content using the Rust programming language as well as an automatic grading server for the class.
-\end{innerlist}\medskip
+\begin{class}{CS 4414}{Operating Systems}{University of Virginia}{Spring 2014}
+	\item Undergraduate TA (office hours, assignment creation). Senior-level core course.
+\end{class}
 
-\textbf{Undergraduate Teaching Assistant: CS 2150} \hfill Fall 2013 -- Spring 2015\\
-\emph{University of Virginia}
-\begin{innerlist}
-	\item[] TA for UVA's undergraduate data structures and C++ programming course.
-\end{innerlist}
+% Gross abuse of date field here because of weird line flow with long sequence of dates
+\begin{class}{CS 2150}{Program and Data Representation}{University of Virginia}{(Fall 2013, Spring
+		2013, Fall 2014, Spring 2015). Undergraduate TA (office hours, lab supervision, grading). Sophomore-level core course.}
+\end{class}
 
-\section{Industry Experience}
+\section{Outreach}
+\begin{loneboldlist}
+	\item[Mentor for \hyperlink{https://blackinai.github.io/}{Black in AI}:] Advised mentee on
+	Ph.D. application process.\hfill2019--2020
+	\item[Reviewer for \hyperlink{https://blackinai.github.io/}{Black in AI}:] Reviewed abstracts for
+	BAI workshop.\hfill2017--2019
+	\item[\href{https://www.eyh.cornell.edu}{Expanding Your Horizons}:] Workshop
+	Organizer/Leader.\hfill Spring 2016, 2017, 2018
+	% \begin{itemize}
+	% 	\setlength\itemsep{0em}
+	% 	\item Created interface for introducing the concept of programming with state machines
+	% 	\item Wrote ROS software to run state machine code on a Kuka youBot
+	% \end{itemize}
+	\item[\href{http://acm.cs.virginia.edu/hspc.php}{UVa HS Programming Contest}:]
+	Organizer/volunteer.~\hfill Spring 2014, 2015
+	% \begin{itemize}
+	% 	\setlength\itemsep{0em}
+	% 	\item Created contest problems
+	% 	\item Planned contest logistics
+	% 	\item Helped run contest
+	% \end{itemize}
+	\item[UVa CS Education Week] Ran intro CS workshop.\hfill Winter 2014, 2015
+	% \\Visited area schools to teach workshops on introductory programming with JKarel.
+\end{loneboldlist}\medskip
 
-\textbf{Software Engineering Intern at Fluencia}\hfill May 2015 -- August 2015\\
-Worked on adding voice understanding for speech practice exercises
-\begin{itemize}
-	\setlength\itemsep{0em}
-	\item Improved voice understanding software
-	\item Integrated into language learning website
-	\item Created test and development framework for voice exercises
-\end{itemize}\medskip
 
-\textbf{Software Development Engineer Intern at Microsoft}\hfill May 2014 -- August 2014\\
-Microsoft Accounts Client Team
-\begin{itemize}
-	\setlength\itemsep{0em}
-	\item Implemented and tested cryptographic operations and network protocol for forthcoming
-	      feature in Microsoft Accounts Android app. The implemented feature enables more convenient and
-	      more secure sign-in for Microsoft accounts via mobile devices.
-	\item Coordinated the work of several other interns working on related components of the same
-	      project to ensure successful integration and delivery of the fully-functional feature ahead of
-	      schedule.
-\end{itemize}\medskip
+\section{Service}
+\begin{loneboldlist}
+	\item[Reviewer:] ICRA (2016, 2019, 2020), IROS (2019), MRS (2019), RO-MAN (2016), RSS (2019),
+	WAFR (2018), AURO, and SIMPAR (2018).
+	\item[Departmental Service:] Colloquim Czar (2016--2020), Administrative Colloquium Czar
+	(2016--2019), Ph.D. Mentor Czar (2016--2018)
+\end{loneboldlist}
 
-\textbf{Software Development Engineer Intern at Microsoft}\hfill May 2013 -- August 2013\\
-Xbox LIVE Cloud Security Team
-\begin{itemize}
-	\setlength\itemsep{0em}
-	\item Designed, implemented, and shipped a RESTful web service capable of logging and auditing
-	      security records in Xbox LIVE in real time. Also designed, created, and tuned associated
-	      database and procedures. Service is currently in use in the Xbox LIVE network.
-	\item Spearheaded and completed a total rewrite of an important development library – starting
-	      with old, cobbled together library used across principal components of the Xbox LIVE network,
-	      redesigned and reimplemented the entire library to provide a faster and easier to use
-	      interface to the same core functionality.
-\end{itemize}
+% \section{Mentoring}
+
+% \section{Open-Source Software}
+
+% \section{Invited Talks}
 
 \section{Technical\\Skills}
 \begin{loneboldlist}
