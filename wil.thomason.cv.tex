@@ -23,8 +23,8 @@
 \usepackage[paper=letterpaper,
 	%includefoot, % Uncomment to put page number above margin
 	marginparwidth=1.2in,     % Length of section titles
-	marginparsep=.05in,       % Space between titles and text
-	margin=1in,               % 1 inch margins
+	marginparsep=0.05in,       % Space between titles and text
+	margin=0.7in,               % 1 inch margins
 	includemp]{geometry}
 
 %% Use these lines for A4-sized paper
@@ -44,6 +44,7 @@
 \usepackage{totcount}
 \usepackage{ifmtarg}
 
+\usepackage[final]{microtype}
 % Finally, give us PDF bookmarks
 \usepackage{color}
 \usepackage{hyperref}
@@ -307,7 +308,7 @@ for robotics, synthesis, motion planning, multi-agent coordination
 % \end{confpub}
 
 \begin{confpub}{A Unified Sampling-Based Approach to Integrated Task and Motion
-		Planning}{\\\textbf{Wil Thomason}, Ross Knepper}{ISRR}{2019}
+		Planning}{\\\textbf{Wil Thomason} and Ross Knepper}{ISRR}{2019}
 	% We contribute a novel approach to integrated task and motion planning that adapts any
 	% 	off-the-shelf motion planning algorithm to automatically solve \emph{task and motion planning
 	% 		problems}. We construct a state space embedding the full symbolic and continuous state of a
@@ -326,7 +327,7 @@ for robotics, synthesis, motion planning, multi-agent coordination
 	% 	that reinforces the expectations of others regarding these avoidance protocols.
 \end{confpub}
 
-\begin{confpub}{Zero-Shot Learning for Unfamiliar Gesture Recognition}{\textbf{Wil Thomason}, Ross
+\begin{confpub}{Zero-Shot Learning for Unfamiliar Gesture Recognition}{\textbf{Wil Thomason} and Ross
 		Knepper}{ISER}{2016}
 	%  We explore a method for achieving increased understanding of complex, situated
 	% communications by leveraging coordinated natural language, gesture, and context. These three
@@ -335,9 +336,9 @@ for robotics, synthesis, motion planning, multi-agent coordination
 \end{confpub}
 
 \section{Journal Publications}
-\begin{journpub}[under review]{Social Momentum: Design and Evaluation of a Framework for Socially Competent Robot Navigation}
-  
+\begin{journpub}[under review]{Social Momentum: Design and Evaluation of a Framework for Socially Competent Robot Navigation}{Christoforos Mavrogiannis, Patr\'{i}cia Alves-Oliveira, \textbf{Wil Thomason}, Ross A. Knepper}{T-HRI}{2021}
 \end{journpub}
+
 \begin{journpub}[authors listed in alphabetical order]{An Accurate Real-Time RFID-Based Location System}{Kirti Chawla, Christopher
 		McFarland, Gabriel Robins, \textbf{Wil Thomason}}{International Journal of Radio Frequency
 		Identification Technology and Applications.}{July 2016}
@@ -379,16 +380,16 @@ Learning.'' June 19th, 2016. \emph{2nd Workshop on Model Learning for Human-Robo
 % \url{http://www.ece.rochester.edu/projects/rail/mlhrc2016/}
 
 \section{Invited Talks and Consortia}
-\begin{symposium}{SBPL Invited Talk}{}{2020\\}
+\begin{symposium}{Search Based Planning Lab}{}{2020\\}
   Invited to present my work on integrated task and motion planning and automatic abstraction repair in the \href{http://www.sbpl.net/}{Search Based Planning Lab}.
 \end{symposium}
 
 \begin{symposium}{RSS Pioneers Workshop \emph{(virtual due to COVID-19)}}{}{2020\\}
-  Selective annual workshop in conjunction with the Robotics: Science and Systems conference (RSS).
+  Selective annual workshop in conjunction with the Robotics: Science and Systems conference.
   Designed to ``bring together a cohort of the world's top early career researchers to foster
-  creativity and collaborations surrounding challenges in all areas of robotics.''\footnote{From the
-    \hyperlink{https://sites.google.com/view/rsspioneers2020\#h.p\_uRuKS3yP_C3Y}{RSS Pioneers 2020
-  website}.} (\emph{33.7\% acceptance rate})
+  creativity and collaborations surrounding challenges in all areas of robotics.''
+  % \footnote{From the \hyperlink{https://sites.google.com/view/rsspioneers2020\#h.p\_uRuKS3yP_C3Y}{RSS Pioneers 2020 website}.}
+  (\emph{33.7\% acceptance rate})
 \end{symposium}
 
 \section{Teaching Experience}
@@ -422,8 +423,7 @@ Learning.'' June 19th, 2016. \emph{2nd Workshop on Model Learning for Human-Robo
 \end{class}
 
 % Gross abuse of date field here because of weird line flow with long sequence of dates
-\begin{class}{CS 2150}{Program and Data Representation}{University of Virginia}{(Fall 2013, Spring
-		2013, Fall 2014, Spring 2015). Undergraduate TA (office hours, lab supervision, grading). Sophomore-level core course.}
+\begin{class}{CS 2150}{Program and Data Representation}{University of Virginia}{(Fall 2013 -- Spring 2015). Undergraduate TA (office hours, lab supervision, grading). Sophomore-level core course.}
 \end{class}
 
 \section{Outreach}
@@ -455,7 +455,7 @@ Learning.'' June 19th, 2016. \emph{2nd Workshop on Model Learning for Human-Robo
 \begin{loneboldlist}
   \item[Faculty chair:] \href{https://sites.google.com/view/rsspioneers2021}{RSS Pioneers 2021} workshop.
   \item[Reviewer:] ICRA (2016, 2019--2021), IROS (2019, 2021), RSS (2019), WAFR (2018), MRS (2019), RO-MAN (2016), RA-L (2021), IJCAI (2021), AURO, T-ASE (2020), and SIMPAR (2018).
-  \item[Departmental Service:] Student representative to Diversity and Inclusion Committee (2020--2021), Colloquim Czar (2016--2020), Administrative Colloquium Czar (2016--2019), Ph.D. Mentor Czar (2016--2018)
+  \item[Departmental Service:] Student representative to Diversity and Inclusion Committee (2020--2021), Colloquim Czar (2016--2020), Administrative Colloquium Czar (2016--2019), Ph.D. Mentor Czar (2016--2018).
 \end{loneboldlist}
 
 % \section{Mentoring}
@@ -537,8 +537,8 @@ Learning.'' June 19th, 2016. \emph{2nd Workshop on Model Learning for Human-Robo
 
 \section{Technical\\Skills}
 \begin{loneboldlist}
-	\item[Programming Languages:] C++, Python, Rust, C, CL, Haskell, OCaml, etc.
-	\item[Technologies:] Linux, ROS, OMPL, PyTorch, TensorFlow, Git, CUDA, etc.
+	\item[Programming Languages:] Python, C++, Julia, Rust, Lua, C, Haskell, OCaml, etc.
+	\item[Technologies:] Linux, ROS, OMPL, Jax, PyTorch, Git, CUDA, etc.
 \end{loneboldlist}
 
 % \section{Languages}
